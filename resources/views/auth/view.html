@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View-permit</title>
+</head>
+<body>
+    <h2>View all permits</h2>
+    <table border="1",id="table">
+      <tr>
+
+      <th>visitor</th>
+         <th>code</th>
+
+
+</tr>
+
+    </table>
+    <button onclick="loadPermit()">permits</button>
+
+<script>
+
+  async function loadPermit(){
+let token = localStorage.getItem("token");
+let res = await fetch("v1/login/permit", {
+headers:{
+    'Authorization':'Bearer'+token,
+},
+});
+
+let data = await response.json(res.data.json);
+let table= document.getElementById('table');
+
+
+data.forEach(e => {
+      let row = <tr> 
+      <td>${e.visitor}</td>
+         <th>${e.code}</th>
+          <tr/>
+          table.innerHTML+=row;
+    });
+    
+     }
+    
+</script>
+  
+</body>
+</html>

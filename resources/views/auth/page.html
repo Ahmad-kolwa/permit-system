@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+ 
+
+</head>
+<body>
+       <h2>Login</h2>
+       <form id="login">
+<input
+type="text"
+name="name"
+placeholder="Enter name"
+value="name"
+/>
+<br/><br/>
+<input
+type="email"
+name="email"
+placeholder="Enter Email"
+value="email"
+/>
+<br/><br/>
+<input
+type="text"
+name="password"
+placeholder="Enter password"
+value="password"
+/>
+<br/><br/>
+<select>
+    <option value="admin">Admin</option>
+        <option value="officer">officer</option>
+            <option value="accountant">Accountant</option>
+</select>
+<button type="submit">Login</button>
+
+
+       </form>
+<script>
+document.getElementsById('login').addEventListener("submit", async function(e){
+e.preventDefault;
+
+let res = await post('v1/login', 
+{
+Method:'POST',
+Headers:{
+'content-type':'application/json'
+},
+body:JSON.stringify({
+'name':document.getElementById('name').value,
+'email':document.getElementById('email').value,
+'password':document.getElementById('password').value,
+'role':document.getElementById('role').value,
+
+})
+
+
+}
+);
+
+alert("register successfully");
+window.location.href('/login')
+
+})
+
+
+
+</script>
+
+    
+</body>
+</html>

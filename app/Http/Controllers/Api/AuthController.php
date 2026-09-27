@@ -1,0 +1,30 @@
+<?php
+
+
+namespace App\Http\Controllers\Api;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+
+class AuthController extends Controller
+{
+    //
+
+    public function login(Request $request)
+{
+    $user = User::firstwhere('email', $request->email);
+
+    if (!$user || !Hash::check($request->password, $user->password)) {
+        return response()->json(['message' => 'Invalid credentials'], 401);
+    }
+
+    $token = $user->createToken('api-token')->plainTextToken;
+
+    return response()->json([
+        'token' => $token,
+        'user' => $user
+    ]);
+}
+}
